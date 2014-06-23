@@ -5,7 +5,7 @@
 
 
 
-	$module = nrns::module("router", []);
+	$module = nrns::module('router', []);
 
 
 	$module->config(function(){
@@ -14,7 +14,7 @@
 
 	});
 
-	$module->provider("routeProvider", "router\\routeProvider");
+	$module->provider('routeProvider', 'router\\routeProvider');
 
 
 
