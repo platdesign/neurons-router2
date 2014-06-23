@@ -52,12 +52,19 @@
 			if( is_array($handler) ) {
 				foreach($handler as $h) {
 					$this->_executeHandler($h);
+					if($this->stopped) {
+						break;
+					}
 				}
 			}
 
 			if( is_callable($handler) ) {
 				nrns::$injection->invoke($handler, ['route'=>$this]);
 			}
+		}
+
+		public function stop() {
+			$this->stopped=true;
 		}
 
 		public function __toString() {
@@ -98,6 +105,9 @@
 
 					foreach($this->activeRoutes as $route) {
 						$route->execute();
+						if($route->stopped) {
+							break;
+						}
 					}
 
 				} else {
