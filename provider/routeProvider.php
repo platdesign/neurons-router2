@@ -51,7 +51,9 @@
 		private function _executeHandler($handler) {
 			if( is_array($handler) ) {
 				foreach($handler as $h) {
-					$this->_executeHandler($h);
+					if( $this->_executeHandler($h) !== NULL) {
+						$this->stop();
+					}
 					if($this->stopped) {
 						break;
 					}
@@ -59,7 +61,7 @@
 			}
 
 			if( is_callable($handler) ) {
-				nrns::$injection->invoke($handler, ['route'=>$this]);
+				return nrns::$injection->invoke($handler, ['route'=>$this]);
 			}
 		}
 
