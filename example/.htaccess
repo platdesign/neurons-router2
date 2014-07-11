@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteBase /git/neurons-router2/example
+
+# Remove double slashes in whole URL
+RewriteCond %{REQUEST_URI} ^(.*)//(.*)$
+RewriteRule . %1/%2 [R=301,L]
+
+# Send each Request to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
